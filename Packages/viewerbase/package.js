@@ -125,9 +125,11 @@ Package.onUse(function (api) {
     api.addFiles('lib/resizeViewportElements.js', 'client');
     api.addFiles('lib/setFocusToActiveViewport.js', 'client');
     api.addFiles('lib/encodeQueryData.js', 'server');
-
+    api.addFiles('lib/modalityDefaultViewport.js', 'client');
+    api.addFiles('lib/hangingprotocols.js', 'client');
 
     //api.export('accountsConfig', 'client');
+    api.export('addMetaData', 'client');
     api.export('resizeViewportElements','client');
     api.export('handleResize','client');
     api.export('enableHotkeys', 'client');
@@ -143,6 +145,10 @@ Package.onUse(function (api) {
     api.export('updateOrientationMarkers', 'client');
     api.export('setFocusToActiveViewport', 'client');
     api.export('encodeQueryData', 'server');
+    api.export('getMammoHangingProtocolObject', 'client');
+    api.export('getModalityDefaultViewport', 'client');
+    api.export('setModalityDefaultViewportFunction', 'client');
+    api.export('ViewerWindows', 'client');
 
     // Viewer management objects
     api.export('toolManager', 'client');
@@ -181,4 +187,3 @@ Package.onUse(function (api) {
 
     api.export('Services', 'server');
 });
-
