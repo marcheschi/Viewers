@@ -8,6 +8,7 @@ switchToTab = function(contentId) {
     if (!contentId) {
         return;
     }
+
     log.info('Switching to tab: ' + contentId);
 
     // Use Bootstrap's Tab JavaScript to show the contents of the current tab
@@ -15,7 +16,7 @@ switchToTab = function(contentId) {
     $('.tabTitle a[data-target="#' + contentId + '"]').tab('show');
 
     // Remove any previous Viewers from the DOM
-    $('#viewer').remove();
+    $('.viewerContainer').remove();
 
     // Update the 'activeContentId' variable in Session
     Session.set('activeContentId', contentId);
@@ -67,10 +68,13 @@ switchToTab = function(contentId) {
         }
 
         // Remove the loading text template that is inside the tab container by default
+        var viewerContainer = document.createElement('div');
+        viewerContainer.classList.add('viewerContainer');
         container.innerHTML = '';
+        container.appendChild(viewerContainer);
 
         // Use Blaze to render the Viewer Template into the container
-        UI.renderWithData(Template.viewer, data, container);
+        UI.renderWithData(Template.viewer, data, viewerContainer);
 
         // Retrieve the DOM element of the viewer
         var imageViewer = $('#viewer');

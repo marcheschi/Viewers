@@ -411,6 +411,10 @@ Meteor.startup(function() {
     cornerstoneTools.magnify.setConfiguration(config);
 });
 
+Template.imageViewerViewport.onCreated(function() {
+   console.log('imageViewerViewport onCreated');
+});
+
 Template.imageViewerViewport.onRendered(function() {
     var templateData = Template.currentData();
     log.info('imageViewerViewport onRendered');
@@ -482,7 +486,10 @@ Template.imageViewerViewport.onDestroyed(function() {
     // Try to stop any currently playing clips
     // Otherwise the interval will continuously throw errors
     try {
-        cornerstoneTools.stopClip(element);
+        var enabledElement = cornerstone.getEnabledElement(element);
+        if (enabledElement) {
+            cornerstoneTools.stopClip(element);
+        }
     } catch (error) {
         log.warn(error);
     }

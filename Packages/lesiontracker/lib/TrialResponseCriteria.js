@@ -1,5 +1,6 @@
 // Create a client-only Collection to store our Validation Errors
 ValidationErrors = new Meteor.Collection(null);
+ValidationErrors._debugName = 'ValidationErrors';
 
 // Set Validate.js Library's default options
 validate.options = {
@@ -216,8 +217,8 @@ function validateSingleMeasurement(measurementData) {
     var criteriaType = Session.get('TrialResponseAssessmentCriteria');
     var currentConstraints = getTrialCriteriaConstraints(criteriaType, measurementData.imageId);
 
+    // If we have no relevant constraints, stop here
     if (!currentConstraints) {
-        log.warn('No relevant contraints could be applied');
         return;
     }
 

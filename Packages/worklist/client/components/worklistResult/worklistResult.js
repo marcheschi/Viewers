@@ -115,6 +115,15 @@ function search() {
     });
 }
 
+Template.worklistResult.onCreated(function() {
+    var self = this;
+    if (Worklist.subscriptions) {
+        Worklist.subscriptions.forEach(function(collectionName) {
+            self.subscribe(collectionName);
+        });
+    }
+});
+
 Template.worklistResult.events({
     'keydown input': function(e) {
         if (e.which === 13) { //  Enter
