@@ -459,7 +459,7 @@ Template.imageViewerViewport.onRendered(function() {
     // TODO: This code block might be refactored
     // Load previous measurement study when reloading a patient
     if (!study) {
-        Meteor.call('GetStudyMetadata', this.data.studyInstanceUid, function(error, study) {
+        getStudyMetadata(this.data.studyInstanceUid, function(study) {
             // Once we have retrieved the data, we sort the series' by series
             // and instance number in ascending order
             if (!study) {
@@ -470,7 +470,7 @@ Template.imageViewerViewport.onRendered(function() {
             data.study = study;
 
             setSeries(data, seriesInstanceUid, templateData);
-        });
+        })
     }
 
     data.study = study;

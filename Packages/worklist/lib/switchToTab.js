@@ -17,6 +17,7 @@ switchToTab = function(contentId) {
 
     // Remove any previous Viewers from the DOM
     $('.viewerContainer').remove();
+    $('.worklistContainer').remove();
 
     // Update the 'activeContentId' variable in Session
     Session.set('activeContentId', contentId);
@@ -24,7 +25,16 @@ switchToTab = function(contentId) {
     // If we are switching to the Worklist tab, reset any CSS styles
     // that have been applied to prevent scrolling in the Viewer.
     // Then stop here, since nothing needs to be re-rendered.
+    var container;
     if (contentId === 'worklistTab') {
+        container = $('.tab-content').find('#worklistTab').get(0);
+        var worklistContainer = document.createElement('div');
+        worklistContainer.classList.add('worklistContainer');
+        container.appendChild(worklistContainer);
+
+        // Use Blaze to render the WorklistResult Template into the container
+        Blaze.render(Template.worklistResult, worklistContainer);
+
         document.body.style.overflow = null;
         document.body.style.height = null;
         document.body.style.minWidth = null;
@@ -74,7 +84,7 @@ switchToTab = function(contentId) {
         container.appendChild(viewerContainer);
 
         // Use Blaze to render the Viewer Template into the container
-        UI.renderWithData(Template.viewer, data, viewerContainer);
+        Blaze.renderWithData(Template.viewer, data, viewerContainer);
 
         // Retrieve the DOM element of the viewer
         var imageViewer = $('#viewer');

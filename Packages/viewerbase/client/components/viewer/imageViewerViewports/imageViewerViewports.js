@@ -113,7 +113,7 @@ Template.imageViewerViewports.helpers({
 
             if (!loadedStudy) {
                 // Load the study
-                Meteor.call('GetStudyMetadata', studyInstanceUid, function(error, study) {
+                getStudyMetadata(this.data.studyInstanceUid, function(study) {
                     log.info("imageViewerViewports GetStudyMetadata: " + studyInstanceUid);
 
                     // Sort the study's series and instances by series and instance number

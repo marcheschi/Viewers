@@ -120,6 +120,7 @@ Template.viewer.onCreated(function() {
 
     self.autorun(function() {
         var dataContext = Template.currentData();
+        self.subscribe('singlePatientAssociatedStudies', dataContext.studies[0].patientId);
         self.subscribe('singlePatientTimepoints', dataContext.studies[0].patientId);
         self.subscribe('singlePatientMeasurements', dataContext.studies[0].patientId);
 
